@@ -1,0 +1,32 @@
+<html xmlns:th="https://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
+<body>
+
+  <h2>Delete Owner</h2>
+  
+  <form th:object="${owner}" class="form-horizontal" id="add-owner-form" method="post">
+	<div class="form-group">
+	  	<p>Do you really want to delete owner <b th:text="*{firstName + ' ' + lastName}"></b> ?</p>
+	</div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+      <!--
+        <button
+          th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
+          class="btn btn-primary" type="submit" th:text="${text}">Add
+          Owner</button>-->
+          
+          <button
+          	class="btn btn-primary" type="submit">Yes
+          </button>
+          <button
+          	class="btn btn-primary">Cancel
+          </button>
+          
+      </div>
+    </div>
+  </form>
+</body>
+</html>

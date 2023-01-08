@@ -43,6 +43,7 @@ import org.springframework.web.servlet.ModelAndView;
 class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
+	private static final String OWNER_DELETE_QUESTION = "owners/ownerDeleteQuestion";
 
 	private final OwnerRepository owners;
 
@@ -141,8 +142,45 @@ class OwnerController {
 
 		owner.setId(ownerId);
 		this.owners.save(owner);
-		return "redirect:/owners/{ownerId}";
+		return "redirect:/owners/ownersList";
 	}
+
+	@GetMapping("/owners/{ownerId}/deletequestion")
+	public String deleteQuestionOwner(@PathVariable("ownerId") int ownerId, Model model) {
+		Owner owner = this.owners.findById(ownerId);
+		model.addAttribute(owner);
+		return OWNER_DELETE_QUESTION;
+	}
+
+	@PostMapping("/owners/{ownerId}/deletequestion")
+	public String deleteQuestionOwner(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") int ownerId) {
+		if (result.hasErrors()) {
+			return OWNER_DELETE_QUESTION;
+		}
+
+		//owner.setId(ownerId);
+		//this.owners.save(owner);
+		//return "redirect:/owners";
+		return "redirect:/owners/find";
+		//return "redirect:/owners/{ownerId}";
+	}
+	/*
+	@GetMapping("/owners/delete")
+	public String deleteOwner(Map<String, Object> model) {
+		//Owner owner = new Owner();
+		//model.put("owner", owner);
+		return OWNER_DELETE_QUESTION;
+	}
+
+	@PostMapping("/owners/delete")
+	public String deleteOwner(@Valid Owner owner, BindingResult result) {
+		if (result.hasErrors()) {
+			return OWNER_DELETE_QUESTION;
+		}
+
+		//this.owners.save(owner);
+		return "redirect:/owners/ownersList";
+	}*/
 
 	/**
 	 * Custom handler for displaying an owner.
