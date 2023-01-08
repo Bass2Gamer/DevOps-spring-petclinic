@@ -143,7 +143,7 @@ class OwnerController {
 
 		owner.setId(ownerId);
 		this.owners.save(owner);
-		return "redirect:/owners/ownersList";
+		return "redirect:/owners/{ownerId}";
 	}
 
 	@GetMapping("/owners/{ownerId}/deletequestion")
