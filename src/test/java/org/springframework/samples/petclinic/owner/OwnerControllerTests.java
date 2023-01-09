@@ -17,6 +17,7 @@
 package org.springframework.samples.petclinic.owner;
 
 import static org.hamcrest.Matchers.empty;
+
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -216,6 +217,18 @@ class OwnerControllerTests {
 						description.appendText("Max did not have any visits");
 					}
 				}))).andExpect(view().name("owners/ownerDetails"));
+	}
+
+	// delete question test
+	@Test
+	public void testInitDeleteQuestionForm() throws Exception {
+		mockMvc.perform(get("/owners/{ownerId}/deletequestion", TEST_OWNER_ID)).andExpect(status().isOk())
+				.andExpect(model().attributeExists("owner")).andExpect(view().name("owners/ownerDeleteQuestion"));
+	}
+
+	@Test
+	public void testProcessDeleteQuestionForm() throws Exception {
+
 	}
 
 }
