@@ -146,24 +146,20 @@ class OwnerController {
 		return "redirect:/owners/{ownerId}";
 	}
 
-	@GetMapping("/owners/{ownerId}/deletequestion")
+	@GetMapping("/owners/{ownerId}/delete")
 	public String deleteQuestionOwner(@PathVariable("ownerId") int ownerId, Model model) {
 		Owner owner = this.owners.findById(ownerId);
 		model.addAttribute(owner);
 		return OWNER_DELETE_QUESTION;
 	}
 
-	@PostMapping("/owners/{ownerId}/deletequestion")
+	@PostMapping("/owners/{ownerId}/delete")
 	public String deleteQuestionOwner(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") int ownerId) {
 		if (result.hasErrors()) {
 			return OWNER_DELETE_QUESTION;
 		}
-
-		// owner.setId(ownerId);
-		// this.owners.save(owner);
-		// return "redirect:/owners";
+		owners.delete(owner);
 		return "redirect:/owners/find";
-		// return "redirect:/owners/{ownerId}";
 	}
 	/*
 	 * @GetMapping("/owners/delete") public String deleteOwner(Map<String, Object> model)

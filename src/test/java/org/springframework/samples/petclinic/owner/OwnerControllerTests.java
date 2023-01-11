@@ -221,14 +221,15 @@ class OwnerControllerTests {
 
 	// delete question test
 	@Test
-	public void testInitDeleteQuestionForm() throws Exception {
-		mockMvc.perform(get("/owners/{ownerId}/deletequestion", TEST_OWNER_ID)).andExpect(status().isOk())
+	public void testInitDeleteForm() throws Exception {
+		mockMvc.perform(get("/owners/{ownerId}/delete", TEST_OWNER_ID)).andExpect(status().isOk())
 				.andExpect(model().attributeExists("owner")).andExpect(view().name("owners/ownerDeleteQuestion"));
 	}
 
 	@Test
-	public void testProcessDeleteQuestionForm() throws Exception {
-
+	public void testProcessDeleteFormSuccess() throws Exception {
+		mockMvc.perform(post("/owners/{ownerId}/delete", TEST_OWNER_ID)).andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/owners/find"));
 	}
 
 }

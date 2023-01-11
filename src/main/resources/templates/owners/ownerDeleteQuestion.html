@@ -12,18 +12,11 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-      <!--
-        <button
-          th:with="text=${owner['new']} ? 'Add Owner' : 'Update Owner'"
-          class="btn btn-primary" type="submit" th:text="${text}">Add
-          Owner</button>-->
           
           <button
           	class="btn btn-primary" type="submit">Yes
           </button>
-          <button
-          	class="btn btn-primary">Cancel
-          </button>
+          <a class="btn btn-primary" th:href="@{/owners/__${owner.id}__}">Cancel</a>
           
       </div>
     </div>
