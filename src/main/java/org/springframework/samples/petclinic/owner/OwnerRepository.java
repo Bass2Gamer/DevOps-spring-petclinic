@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -80,9 +81,30 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 	Page<Owner> findAll(Pageable pageable);
 
 	/**
-	 * Delete an {@link Owner} in the data store.
+	 * Delete an {@link Owner} in the data store. (deletes owner_id in Pet, deletes Owner
+	 * with id, Problem: deletes Pet with same id as Owner)
 	 * @param owner the {@link Owner} to delete
 	 */
 	void delete(Owner owner);
+
+	/**
+	 * Delete an {@link Owner} in the data store by id.
+	 * @param id the id to delete
+	 *
+	 */
+	@Transactional
+	@Modifying(flushAutomatically = true)
+	@Query("DELETE FROM Owner owner WHERE owner.id =:id")
+	void deleteOwner(@Param("id") Integer id);
+
+	/**
+	 * Delete owner_id of pet
+	 * @param id the id of the owner to delete
+	 *
+	 */
+	@Transactional
+	@Modifying
+	@Query("UPDATE Pet SET owner_id=null WHERE owner_id=:id")
+	void deleteOwnerPreparation(@Param("id") Integer id);
 
 }

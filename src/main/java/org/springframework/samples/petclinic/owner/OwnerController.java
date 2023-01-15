@@ -159,18 +159,10 @@ class OwnerController {
 			return OWNER_DELETE_QUESTION;
 		}
 		owners.delete(owner);
+		// owners.deleteOwnerPreparation(owner.getId());
+		// owners.deleteOwner(owner.getId());
 		return "redirect:/owners/find";
 	}
-	/*
-	 * @GetMapping("/owners/delete") public String deleteOwner(Map<String, Object> model)
-	 * { //Owner owner = new Owner(); //model.put("owner", owner); return
-	 * OWNER_DELETE_QUESTION; }
-	 *
-	 * @PostMapping("/owners/delete") public String deleteOwner(@Valid Owner owner,
-	 * BindingResult result) { if (result.hasErrors()) { return OWNER_DELETE_QUESTION; }
-	 *
-	 * //this.owners.save(owner); return "redirect:/owners/ownersList"; }
-	 */
 
 	/**
 	 * Custom handler for displaying an owner.

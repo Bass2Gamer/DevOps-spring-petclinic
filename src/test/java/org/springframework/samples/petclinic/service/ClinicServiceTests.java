@@ -223,4 +223,21 @@ class ClinicServiceTests {
 				.element(0).extracting(Visit::getDate).isNotNull();
 	}
 
+	@Test
+	@Transactional
+	void shouldDeleteOwner() {
+		Owner owner = this.owners.findById(1);
+
+		assertThat(owner).isNotNull();
+		assertThat(owner.getPets()).isNotEmpty();
+
+		this.owners.delete(owner);
+
+		// this.owners.deleteOwnerPreparation(owner.getId());
+		// this.owners.deleteOwner(owner.getId());
+
+		owner = this.owners.findById(1);
+		assertThat(owner).isNull();
+	}
+
 }
